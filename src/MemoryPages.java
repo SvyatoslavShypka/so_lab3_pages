@@ -20,12 +20,12 @@ public class MemoryPages {
         algFIFO();
         algOPT();
         algLRU();
-        algAproksLRU();
+        algAproxLRU();
         algRAND();
 
     }
 
-    private static void algAproksLRU() {
+    private static void algAproxLRU() {
 
     }
 
