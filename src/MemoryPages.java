@@ -1,9 +1,4 @@
-package src;
-
-import javax.management.Query;
 import java.util.*;
-import java.util.function.Predicate;
-import java.util.stream.IntStream;
 
 public class MemoryPages {
 
