@@ -2,7 +2,7 @@ import java.util.*;
 
 public class MemoryPages {
 
-
+//   data by default
     private static int[] pageRequests = new int[] {1, 2, 3, 4, 1, 2, 5, 1, 2, 3, 4, 5};
     private static int frameQuantity = 4;
     private static int quantityOfPages = 5;
@@ -10,7 +10,7 @@ public class MemoryPages {
 
     public static void main(String[] args) {
 
-//        losoweDane();
+        losoweDane();
 
         algFIFO();
         algOPT();
@@ -27,21 +27,21 @@ public class MemoryPages {
     private static void losoweDane() {
         Random random = new Random();
         Scanner sc = new Scanner(System.in);
-        System.out.print("Podaj liczbę stron: ");
-        quantityOfPages = sc.nextInt();
-        if (quantityOfPages == 0) {
-            quantityOfPages = random.nextInt(100);
-        }
         System.out.print("Podaj liczbę ramek: ");
         frameQuantity = sc.nextInt();
         if (frameQuantity == 0) {
-            frameQuantity = random.nextInt(10);
+            frameQuantity = random.nextInt(10) + 4;
         }
 
+        System.out.print("Podaj liczbę stron: ");
+        quantityOfPages = sc.nextInt();
+        if (quantityOfPages == 0) {
+            quantityOfPages = random.nextInt(100) + frameQuantity + 1;
+        }
         System.out.print("Podaj liczbę odwołań do stron: ");
         liczbaOdwolanDoStron = sc.nextInt();
         if (liczbaOdwolanDoStron == 0) {
-            liczbaOdwolanDoStron = random.nextInt(1000);
+            liczbaOdwolanDoStron = random.nextInt(1000) + 10;
         }
 
         pageRequests = new int[liczbaOdwolanDoStron];
