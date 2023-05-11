@@ -10,7 +10,7 @@ public class MemoryPages {
 
     public static void main(String[] args) {
 
-        losoweDane();
+//        losoweDane();
         System.out.print("pageRequests = ");
         for (int i = 0; i < pageRequests.length; i++) {
             System.out.print(pageRequests[i] + ", ");
@@ -18,7 +18,6 @@ public class MemoryPages {
         System.out.println();
         System.out.println("quantityOfPages = " + quantityOfPages);
         System.out.println("liczbaOdwolanDoStron = " + liczbaOdwolanDoStron);
-
 
         for (int i = 0; i < 3; i++) {
             switch (i) {
