@@ -10,7 +10,15 @@ public class MemoryPages {
 
     public static void main(String[] args) {
 
-//        losoweDane();
+        losoweDane();
+        System.out.print("pageRequests = ");
+        for (int i = 0; i < pageRequests.length; i++) {
+            System.out.print(pageRequests[i] + ", ");
+        }
+        System.out.println();
+        System.out.println("frameQuantity = " + frameQuantity);
+        System.out.println("quantityOfPages = " + quantityOfPages);
+        System.out.println("liczbaOdwolanDoStron = " + liczbaOdwolanDoStron);
 
         algFIFO();
         algOPT();
@@ -32,7 +40,6 @@ public class MemoryPages {
 
         for (int i = 0; i < liczbaOdwolanDoStron; i++) {
             int page = pageRequests[i];
-            pagesRecentlyCalledList.add(page);
             if (pagesRecentlyCalledList.size() > frameQuantity + 1) {
                 pagesRecentlyCalledList.remove(0);
             }
@@ -41,7 +48,6 @@ public class MemoryPages {
             if (!pageSet.contains(page)) {
                 pageFaults++;
                 if (pageSet.size() >= frameQuantity) {
-                    Stack<Integer> leastUsed = new Stack<>();
                     int removePage = 0;
                     for (int j = 0; j < pagesRecentlyCalledList.size(); j++) {
                         removePage = pagesRecentlyCalledList.get(j);
@@ -60,6 +66,7 @@ public class MemoryPages {
                     pagesRecentlyCalledList.remove(0);
                 }
                 pageSet.add(page);
+                pagesRecentlyCalledList.add(page);
                 bitArray[page] = 1;
             }
         }
