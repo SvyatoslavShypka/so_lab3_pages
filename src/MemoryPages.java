@@ -9,8 +9,8 @@ public class MemoryPages {
     private static int liczbaOdwolanDoStron = 12;
 
     public static void main(String[] args) {
-
-//        losoweDane();
+// Dla losowych danych - wprowadzamy zero
+        losoweDane();
         System.out.print("pageRequests = ");
         for (int i = 0; i < pageRequests.length; i++) {
             System.out.print(pageRequests[i] + ", ");
@@ -20,6 +20,7 @@ public class MemoryPages {
         System.out.println("liczbaOdwolanDoStron = " + liczbaOdwolanDoStron);
 
         for (int i = 0; i < 3; i++) {
+// dla trzech rodzajów bramek SWITCH
             switch (i) {
                 case 0:
                     frameQuantity = 3;
