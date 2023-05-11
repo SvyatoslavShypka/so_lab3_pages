@@ -90,7 +90,7 @@ public class MemoryPages {
         System.out.print("Podaj liczbę odwołań do stron: ");
         liczbaOdwolanDoStron = sc.nextInt();
         if (liczbaOdwolanDoStron == 0) {
-            liczbaOdwolanDoStron = random.nextInt(1000) + 10;
+            liczbaOdwolanDoStron = random.nextInt(2000) + 1000;
         }
 
         pageRequests = new int[liczbaOdwolanDoStron];
