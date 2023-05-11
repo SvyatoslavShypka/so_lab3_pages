@@ -16,16 +16,30 @@ public class MemoryPages {
             System.out.print(pageRequests[i] + ", ");
         }
         System.out.println();
-        System.out.println("frameQuantity = " + frameQuantity);
         System.out.println("quantityOfPages = " + quantityOfPages);
         System.out.println("liczbaOdwolanDoStron = " + liczbaOdwolanDoStron);
 
-        algFIFO();
-        algOPT();
-        algLRU();
-        algAproxLRU();
-        algRAND();
 
+        for (int i = 0; i < 3; i++) {
+            switch (i) {
+                case 0:
+                    frameQuantity = 3;
+                    break;
+                case 1:
+                    frameQuantity = 5;
+                    break;
+                case 2:
+                    frameQuantity = 10;
+                    break;
+            }
+
+                System.out.println("frameQuantity = " + frameQuantity);
+                algFIFO();
+                algOPT();
+                algLRU();
+                algAproxLRU();
+                algRAND();
+        }
     }
 
     private static void algAproxLRU() {
