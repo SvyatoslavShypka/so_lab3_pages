@@ -10,7 +10,7 @@ public class MemoryPages {
 
     public static void main(String[] args) {
 
-        losoweDane();
+//        losoweDane();
 
         algFIFO();
         algOPT();
@@ -21,7 +21,49 @@ public class MemoryPages {
     }
 
     private static void algAproxLRU() {
+        int pageFaults = 0;
+        Set<Integer> pageSet = new HashSet<>();
+        List<Integer> pagesRecentlyCalledList = new ArrayList<>();
+        int[] bitArray = new int[quantityOfPages + 1];
+        for (int i = 0; i < bitArray.length; i++) {
+            // 0 - means that page was not called recently
+            bitArray[i] = 0;
+        }
 
+        for (int i = 0; i < liczbaOdwolanDoStron; i++) {
+            int page = pageRequests[i];
+            pagesRecentlyCalledList.add(page);
+            if (pagesRecentlyCalledList.size() > frameQuantity + 1) {
+                pagesRecentlyCalledList.remove(0);
+            }
+            bitArray[page] = 1;
+            // if fault
+            if (!pageSet.contains(page)) {
+                pageFaults++;
+                if (pageSet.size() >= frameQuantity) {
+                    Stack<Integer> leastUsed = new Stack<>();
+                    int removePage = 0;
+                    for (int j = 0; j < pagesRecentlyCalledList.size(); j++) {
+                        removePage = pagesRecentlyCalledList.get(j);
+                        if (bitArray[removePage] == 0) {
+                            break;
+                        }
+                        if (j == pagesRecentlyCalledList.size() -1) {
+                            for (int k = 0; k < bitArray.length; k++) {
+                                // 0 - means that page was not called recently
+                                bitArray[k] = 0;
+                            }
+                            removePage = pagesRecentlyCalledList.get(0);
+                        }
+                    }
+                    pageSet.remove(removePage);
+                    pagesRecentlyCalledList.remove(0);
+                }
+                pageSet.add(page);
+                bitArray[page] = 1;
+            }
+        }
+        System.out.println("Metoda AproxLRU - Liczba błędów strony: " + pageFaults);
     }
 
     private static void losoweDane() {
@@ -62,12 +104,26 @@ public class MemoryPages {
             if (!pageSet.contains(page)) {
                 pageFaults++;
                 if (pageSet.size() >= frameQuantity) {
-                    pageSet.remove(random.nextInt(frameQuantity - 1) + 1);
+                    int randomPage = getRandomPage(pageSet, random);
+//                    pageSet.remove(random.nextInt(frameQuantity - 1) + 1);
+                    pageSet.remove(randomPage);
                 }
                 pageSet.add(page);
             }
         }
         System.out.println("Metoda RAND - Liczba błędów strony: " + pageFaults);
+    }
+
+    private static int getRandomPage(Set<Integer> pageSet, Random random) {
+        int randomIndex = random.nextInt(pageSet.size());
+        int i = 0;
+        for(int page : pageSet) {
+            if (i == randomIndex) {
+                return page;
+            }
+            i++;
+        }
+        throw new IllegalStateException("Empty page set");
     }
 
     private static void algLRU() {
